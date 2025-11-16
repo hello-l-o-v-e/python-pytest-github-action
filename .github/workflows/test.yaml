@@ -1,9 +1,9 @@
 name: demo
-on: 
+on:
   workflow_dispatch:
   push:
     branches:
-      - 'master'
+      - 'main'
 
 jobs:
   test-code:
@@ -20,7 +20,7 @@ jobs:
         with:
           name: test-report
           path: htmlcov/
-  
+
   deploy:
     runs-on: ubuntu-22.04
     steps:
