@@ -14,9 +14,8 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v3
-      - name: set up 
-        uses: actions/setup-python@v4
-      - name: set up py
+      - uses: actions/setup-python@v4
+        name: set up py
         with:
           python-version: ${{ matrix.version }}
       - name: install requirements 
