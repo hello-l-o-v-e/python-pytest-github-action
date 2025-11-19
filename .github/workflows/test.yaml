@@ -6,9 +6,10 @@ on:
       - 'main'
 jobs:
   test-code:
-    runs-on: ubuntu-22.04
+    runs-on: ${{matrix.os}}
     strategy:
       matrix:
+        os: [ubuntu-22.04, ubuntu-20.04]
         version: ['3.8', '3.9', '3.10']
     steps:
       - name: checkout code
@@ -23,10 +24,10 @@ jobs:
         id: run-py-test
         run: pytest --cov-report html:htmlcov --cov-report term --cov=project tests
       - name: upload test reports
-        if:  (failure() || cancelled()) && steps.run-py-test.outcome != 'success'
+        if:  failure() && steps.run-py-test.outcome == 'failure'
         uses: actions/upload-artifact@v4
         with:
-          name: test-report-${{ matrix.version }}
+          name: test-report-${{matrix.os}}-${{ matrix.version }}
           path: htmlcov/
   deploy:
     runs-on: ubuntu-22.04
