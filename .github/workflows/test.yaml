@@ -12,7 +12,7 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v3
       - name: set up py38
-      - uses: actions/setup-python@v4
+        uses: actions/setup-python@v4
         with:
           python-version: '3.8'
       - name: install requirements py38
@@ -25,9 +25,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-report
-          path: htmlcov/
-      - name: set up py39
+          path: htmlcov/ 
       - uses: actions/setup-python@v4
+        name: set up py39
         with:
           python-version: '3.9'
       - name: install requirements py39
